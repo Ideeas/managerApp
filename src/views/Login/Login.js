@@ -9,7 +9,7 @@ import Title from './components/Title'
 import Input from '../../general/components/Input'
 import Button from '../../general/components/Button'
 
-const LoginView = () => {
+const LoginView = ({ navigate }) => {
   return (
     <Container>
       <View style={styles.LogoContainer}>
@@ -30,7 +30,9 @@ const LoginView = () => {
 
         <View style={styles.createAccountContainer}>
           <Text style={styles.createAccount}>Dont have account?</Text>
-          <Text style={[styles.createAccount, { color: COLORS.blue100 }]}>Sign up</Text>
+          <Text onPress={navigate} style={[styles.createAccount, { color: COLORS.blue100 }]}>
+            Sign up
+          </Text>
         </View>
       </View>
     </Container>

@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     backgroundColor: COLORS.blue500,
-    paddingTop: Platform.OS === 'ios' && getStatusBarHeight(),
+    paddingTop: Platform.OS === 'ios' ? getStatusBarHeight() : 0,
   },
 })
 
