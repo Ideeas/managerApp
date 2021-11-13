@@ -1,63 +1,103 @@
 import React from 'react'
 import { View, Text, StyleSheet, Platform, ScrollView, KeyboardAvoidingView } from 'react-native'
-
 import { COLORS } from '../../general/styles/colors'
+import { Controller, useForm } from 'react-hook-form'
 
 import Input from '../../general/components/Input'
 import Button from '../../general/components/Button'
 import Header from './components/Header'
+import Spinner from 'react-native-loading-spinner-overlay'
 
 const formFields = [
   {
-    type: 'NAME',
+    type: 'name',
     placeholder: 'Name',
     value: '',
   },
 
   {
-    type: 'EMAIL',
+    type: 'email',
     placeholder: 'Email',
+    rules: {
+      pattern: {
+        value:
+          /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+        message: 'Email must be valid',
+      },
+    },
     value: '',
   },
 
   {
-    type: 'USERNAME',
+    type: 'username',
     placeholder: 'Username',
     value: '',
   },
 
   {
-    type: 'PASSWORD',
+    type: 'password',
     placeholder: 'Password',
+    rules: {
+      minLength: {
+        value: 5,
+        message: 'Password must have at least 5 characteres',
+      },
+
+      maxLength: {
+        value: 200,
+        message: 'Password must have 200 characteres',
+      },
+    },
     value: '',
   },
 ]
 
-const SignUpView = ({ onPress, handleChange }) => {
+const SignUpView = ({ submit, loading }) => {
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm({ mode: 'onBlur' })
+
   const renderFormsFields = () =>
-    formFields.map((field, index) => (
-      <View key={index} style={{ marginTop: 20 }}>
-        <Input
-          placeholder={field.placeholder}
-          onChangeText={(content) => {
-            handleChange(field.type, content)
+    formFields.map(({ type, rules, placeholder }, index) => (
+      <View key={index} style={{ marginVertical: 10 }}>
+        <Controller
+          control={control}
+          name={type}
+          rules={{
+            ...rules,
+            required: { value: true, message: `${placeholder} must not be empty` },
           }}
+          render={({ field: { onChange, value, onBlur } }) => (
+            <Input
+              placeholder={placeholder}
+              value={value}
+              onBlur={onBlur}
+              onChangeText={onChange}
+            />
+          )}
         />
+        {renderErrorMessage(type)}
       </View>
     ))
+
+  const renderErrorMessage = (type) => {
+    return <Text style={styles.error}>{errors[type]?.message}</Text>
+  }
 
   return (
     <View style={styles.container}>
       <Header title="Lets get started !" subtitle="Create new account" />
-
       <KeyboardAvoidingView behavior="padding" style={{ marginTop: '20%' }}>
+        <Spinner visible={loading} color={COLORS.blue500} />
         <ScrollView>
           <View>{renderFormsFields()}</View>
         </ScrollView>
       </KeyboardAvoidingView>
 
       <View style={styles.buttonContainer}>
-        <Button content="Sign Up" onPress={onPress} />
+        <Button content="Sign Up" onPress={handleSubmit(submit)} />
         <Text style={styles.signIn}>Sign in</Text>
       </View>
     </View>
@@ -79,6 +119,13 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginTop: 10,
     alignSelf: 'center',
+  },
+
+  error: {
+    textAlign: 'center',
+    fontSize: 16,
+    color: COLORS.white,
+    marginTop: 5,
   },
 })
 
