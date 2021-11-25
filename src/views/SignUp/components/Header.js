@@ -15,7 +15,7 @@ const Header = ({ title, subtitle }) => {
 
 const styles = StyleSheet.create({
   contentContainer: {
-    flexGrow: 1.5,
+    flexGrow: 2,
     backgroundColor: COLORS.blue700,
     justifyContent: 'center',
     paddingLeft: 20,

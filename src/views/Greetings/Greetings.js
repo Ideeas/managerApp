@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, Platform, StatusBar, StyleSheet } from 'react-native'
-
 import { COLORS } from '../../general/styles/colors'
+
 import SvgGreetings from '../../general/assets/SvgGreetings.svg'
 
 import Container from '../../general/components/container'

@@ -6,7 +6,13 @@ import rootSaga from './sagas/RootSagas'
 export const START_LOADING = 'START_LOADING'
 export const STOP_LOADING = 'STOP_LOADING'
 
-const rootReducer = (state = {}, action) => {
+const initialState = {
+  user: {
+    token: null,
+  },
+}
+
+const rootReducer = (state = initialState, action) => {
   if (action.type === START_LOADING) {
     return { ...state, loading: true }
   }

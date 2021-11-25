@@ -1,14 +1,16 @@
 import React from 'react'
 import LoginView from './Login'
 
-import { useNavigation } from '@react-navigation/core'
+import { useDispatch } from 'react-redux'
+import { authUser } from '../../general/redux/user'
 
 const LoginContainer = () => {
-  const navigation = useNavigation()
-  const handleNavigate = () => {
-    navigation.navigate('SignUp')
+  const dispatch = useDispatch()
+  const handleLogin = () => {
+    dispatch(authUser())
   }
-  return <LoginView navigate={handleNavigate} />
+
+  return <LoginView handleLogin={handleLogin} />
 }
 
 export default LoginContainer

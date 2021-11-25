@@ -61,7 +61,7 @@ const SignUpView = ({ submit, loading }) => {
 
   const renderFormsFields = () =>
     formFields.map(({ type, rules, placeholder }, index) => (
-      <View key={index} style={{ marginVertical: 10 }}>
+      <View key={index} style={{ marginVertical: 5 }}>
         <Controller
           control={control}
           name={type}
@@ -89,17 +89,15 @@ const SignUpView = ({ submit, loading }) => {
   return (
     <View style={styles.container}>
       <Header title="Lets get started !" subtitle="Create new account" />
-      <KeyboardAvoidingView behavior="padding" style={{ marginTop: '20%' }}>
+      <ScrollView showsVerticalScrollIndicator={false} style={{ marginTop: 30 }}>
         <Spinner visible={loading} color={COLORS.blue500} />
-        <ScrollView>
-          <View>{renderFormsFields()}</View>
-        </ScrollView>
-      </KeyboardAvoidingView>
+        <View>{renderFormsFields()}</View>
 
-      <View style={styles.buttonContainer}>
-        <Button content="Sign Up" onPress={handleSubmit(submit)} />
-        <Text style={styles.signIn}>Sign in</Text>
-      </View>
+        <View style={styles.buttonContainer}>
+          <Button content="Sign Up" onPress={handleSubmit(submit)} />
+          <Text style={styles.signIn}>Sign in</Text>
+        </View>
+      </ScrollView>
     </View>
   )
 }

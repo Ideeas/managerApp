@@ -1,9 +1,9 @@
-import { takeLatest, all } from 'redux-saga/effects'
-import createUser from '../../../views/SignUp/redux/sagas/CreateUser'
-import { CREATE_USER_REQUESTED } from '../../../views/SignUp/redux'
+import { all } from 'redux-saga/effects'
+import userCombineSagas from '../user'
+import signUpSagas from '../../../views/SignUp/redux/sagas/CreateUser'
 
 function* watchAllSagas() {
-  yield all([takeLatest(CREATE_USER_REQUESTED, createUser)])
+  yield all([...signUpSagas, ...userCombineSagas])
 }
 
 export default watchAllSagas

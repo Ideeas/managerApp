@@ -1,6 +1,7 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { COLORS } from '../../general/styles/colors'
+import { useNavigation } from '@react-navigation/core'
 
 import Logo from '../../general/assets/Logo.svg'
 
@@ -9,7 +10,8 @@ import Title from './components/Title'
 import Input from '../../general/components/Input'
 import Button from '../../general/components/Button'
 
-const LoginView = ({ navigate }) => {
+const LoginView = ({ handleLogin }) => {
+  const navigation = useNavigation()
   return (
     <Container>
       <View style={styles.LogoContainer}>
@@ -26,11 +28,14 @@ const LoginView = ({ navigate }) => {
       </View>
 
       <View style={styles.buttonContainer}>
-        <Button content="Sign in" />
+        <Button content="Sign in" onPress={handleLogin} />
 
         <View style={styles.createAccountContainer}>
           <Text style={styles.createAccount}>Dont have account?</Text>
-          <Text onPress={navigate} style={[styles.createAccount, { color: COLORS.blue100 }]}>
+          <Text
+            onPress={() => navigation.navigate('SignUp')}
+            style={[styles.createAccount, { color: COLORS.blue100 }]}
+          >
             Sign up
           </Text>
         </View>
