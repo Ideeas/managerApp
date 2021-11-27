@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text, TouchableOpacity, StyleSheet } from 'react-native'
-
-import { COLORS } from '../../styles/colors'
+import { MaterialCommunityIcons } from '@expo/vector-icons'
+import { COLORS } from '../../../general/styles/colors'
 
 const Button = ({ children, background = '', color = '', content, ...rest }) => {
   const backgroundColor = background === '' ? COLORS.blue100 : background
@@ -9,13 +9,18 @@ const Button = ({ children, background = '', color = '', content, ...rest }) => 
   return (
     <TouchableOpacity style={[styles.container, { backgroundColor }]} {...rest}>
       <Text style={[styles.textButton, { color: buttonColor }]}>{content}</Text>
+      <MaterialCommunityIcons name="chevron-right" size={40} color={COLORS.blue500} />
     </TouchableOpacity>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: 15,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
     marginHorizontal: 20,
     borderRadius: 20,
   },
@@ -23,7 +28,6 @@ const styles = StyleSheet.create({
   textButton: {
     fontSize: 24,
     fontWeight: 'bold',
-    alignSelf: 'center',
   },
 })
 

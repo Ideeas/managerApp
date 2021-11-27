@@ -10,6 +10,7 @@ import Greetings from '../views/Greetings/Container'
 import Login from '../views/Login/Container'
 import SignUp from '../views/SignUp/Container'
 import Home from '../views/Home/container'
+import Icons from './components/Icons'
 
 const Public = createNativeStackNavigator()
 const Private = createBottomTabNavigator()
@@ -20,7 +21,17 @@ export default function Routers() {
   const options = {
     headerShown: false,
   }
-  const tabBarStyle = { backgroundColor: COLORS.blue500, borderTopWidth: 0 }
+
+  const screenOptions = ({ route }) => ({
+    tabBarIcon: ({ focused }) => {
+      if (route.name === 'Home') {
+        return <Icons name="home" isSelect={focused} />
+      }
+    },
+    tabBarStyle: { backgroundColor: COLORS.blue500, borderTopWidth: 0 },
+    tabBarShowLabel: false,
+  })
+
   return (
     <NavigationContainer>
       {user?.token === null ? (
@@ -30,7 +41,7 @@ export default function Routers() {
           <Public.Screen name="SignUp" component={SignUp} options={options} />
         </Public.Navigator>
       ) : (
-        <Private.Navigator screenOptions={{ tabBarStyle }}>
+        <Private.Navigator screenOptions={screenOptions}>
           <Private.Screen name="Home" component={Home} options={options} />
         </Private.Navigator>
       )}
