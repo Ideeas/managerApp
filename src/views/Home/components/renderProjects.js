@@ -3,12 +3,16 @@ import { TouchableOpacity, View, Text, StyleSheet } from 'react-native'
 import { COLORS } from '../../../general/styles/colors'
 import ButtonStatus from './ButtonStatus'
 
-const renderProjects = ({ title, status, date, owner }, onLongPress, isInteracting) => {
+const renderProjects = (props) => {
+  const { cardData, isInteracting, handlePressIn, handlePressOut } = props
+  const { status, title, owner, date } = cardData
+
   return (
     <TouchableOpacity
       style={[styles.container, isInteracting && styles.onLongPressStyle]}
-      onLongPress={onLongPress}
       activeOpacity={0.5}
+      onPressIn={handlePressIn}
+      onPressOut={handlePressOut}
     >
       <ButtonStatus status={status} />
       <View>

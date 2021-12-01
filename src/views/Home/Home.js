@@ -9,9 +9,10 @@ import Button from './components/Button'
 import renderProjects from './components/renderProjects'
 
 function HomeView({ user }) {
-  const [isInteracting, setIsInteracting] = useState(false)
-  const handleLongPress = () => {
-    setIsInteracting(!isInteracting)
+  const [isPressingButton, setIsPressingButton] = useState(false)
+
+  const handlePress = () => {
+    setIsPressingButton(!isPressingButton)
   }
 
   return (
@@ -29,7 +30,14 @@ function HomeView({ user }) {
           <FlatList
             data={user.projects}
             keyExtractor={(item) => item.id}
-            renderItem={({ item }) => renderProjects(item, handleLongPress, isInteracting)}
+            renderItem={({ item }) =>
+              renderProjects({
+                cardData: item,
+                isInteracting: isPressingButton,
+                handlePressIn: handlePress,
+                handlePressOut: handlePress,
+              })
+            }
           />
         </>
       ) : (
