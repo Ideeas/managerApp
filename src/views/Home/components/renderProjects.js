@@ -9,7 +9,7 @@ const renderProjects = (props) => {
 
   return (
     <TouchableOpacity
-      style={[styles.container, isInteracting && styles.onLongPressStyle]}
+      style={[styles.container, isInteracting && styles.onInteracting]}
       activeOpacity={0.5}
       onPressIn={handlePressIn}
       onPressOut={handlePressOut}
@@ -44,8 +44,7 @@ const styles = StyleSheet.create({
     color: COLORS.white,
   },
 
-  onLongPressStyle: {
-    marginHorizontal: 10,
+  onInteracting: {
     backgroundColor: COLORS.transparentBlue,
     borderRadius: 30,
   },
