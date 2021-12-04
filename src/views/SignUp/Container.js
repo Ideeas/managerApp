@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { Alert } from 'react-native'
 import SignUpViews from './SignUp'
 
@@ -31,7 +31,7 @@ const SignUpContainer = () => {
   }, [message, error])
 
   useEffect(() => {
-    return function () {
+    return () => {
       dispatch(clearData())
     }
   }, [])
