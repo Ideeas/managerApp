@@ -1,15 +1,20 @@
 import React from 'react'
 import LoginView from './Login'
 
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { authUser } from '../../general/redux/user'
+import { Alert } from 'react-native'
 
 const LoginContainer = () => {
   const dispatch = useDispatch()
+  const error = useSelector((state) => state.error)
   const handleLogin = () => {
     dispatch(authUser())
   }
 
+  if (error) {
+    Alert.alert('Login error, try again later' + error.message)
+  }
   return <LoginView handleLogin={handleLogin} />
 }
 

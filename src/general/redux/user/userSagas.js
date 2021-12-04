@@ -32,8 +32,8 @@ function* userSagas({ payload, meta }) {
       ],
     }
     yield put({ type: USER_AUTH_SUCCESS, payload: userData, meta })
-  } catch ({ message }) {
-    yield put({ type: USER_AUTH_FAIILED, payload: message, meta })
+  } catch (error) {
+    yield put({ type: USER_AUTH_FAIILED, payload: error, meta })
   } finally {
     yield put({ type: 'STOP_LOADING' })
   }
