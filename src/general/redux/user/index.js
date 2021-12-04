@@ -6,6 +6,10 @@ const userReducer = (state, action) => {
   if (action.type === USER_AUTH_SUCCESS) {
     return { ...state, user: action.payload }
   }
+
+  if (action.type === USER_AUTH_FAIILED) {
+    return { ...state, error: action.payload }
+  }
 }
 
 export const authUser = () => {
