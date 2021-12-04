@@ -7,6 +7,7 @@ import UserImg from '../../general/assets/userImg.svg'
 
 import Button from './components/Button'
 import renderProjects from './components/renderProjects'
+import renderFavorites from './components/renderFavorites'
 
 function HomeView({ user }) {
   const [isPressingButton, setIsPressingButton] = useState(false)
@@ -24,9 +25,9 @@ function HomeView({ user }) {
         </View>
         <UserImg />
       </View>
-      {user.projects.length > 0 ? (
-        <>
-          <View style={{ flex: 1 }}></View>
+      {user.projects?.length > 0 ? (
+        <View>
+          {renderFavorites({ projects: user.favoritesProjects })}
           <FlatList
             data={user.projects}
             keyExtractor={(item) => item.id}
@@ -39,7 +40,7 @@ function HomeView({ user }) {
               })
             }
           />
-        </>
+        </View>
       ) : (
         <>
           <View style={styles.buttonContainer}>
