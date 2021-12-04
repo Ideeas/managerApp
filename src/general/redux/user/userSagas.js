@@ -7,15 +7,33 @@ function* userSagas({ payload, meta }) {
     const userData = {
       token: '123',
       name: 'Vinicius',
-      favorites: 0,
       projects: [
-        { id: 1, title: 'Projeto ex', status: 'complete', date: '16/08/2001', owner: 'Junin' },
+        {
+          id: 1,
+          title: 'Projeto ex',
+          status: 'complete',
+          date: '16/08/2001',
+          owner: 'Junin',
+          image: '',
+          imageOwner: '',
+        },
       ],
-      favoritesProjects: [],
+
+      favoritesProjects: [
+        {
+          id: 1,
+          title: 'Projeto ex',
+          status: 'complete',
+          date: '16/08/2001',
+          owner: 'Junin',
+          image: '',
+          imageOwner: '',
+        },
+      ],
     }
     yield put({ type: USER_AUTH_SUCCESS, payload: userData, meta })
   } catch ({ message }) {
-    yield put({ type: USER_AUTH_FAIILED, error: message, meta })
+    yield put({ type: USER_AUTH_FAIILED, payload: message, meta })
   } finally {
     yield put({ type: 'STOP_LOADING' })
   }
