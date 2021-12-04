@@ -12,9 +12,17 @@ function renderFavorites({ projects }) {
   }
 
   return (
-    <ScrollView style={{ marginHorizontal: 10 }} horizontal showsHorizontalScrollIndicator={false}>
-      {projects.map(({ title, owner }) => (
-        <FavoriteCard title={title} owner={owner} image={} ownerImg={}/>
+    <ScrollView style={{ marginVertical: 50 }} horizontal showsHorizontalScrollIndicator={false}>
+      {projects.map(({ title, owner, id }) => (
+        <View style={{ marginHorizontal: 20 }}>
+          <FavoriteCard
+            key={id}
+            title={title}
+            owner={owner}
+            image={projects.image}
+            ownerImg={projects.ownerImg}
+          />
+        </View>
       ))}
     </ScrollView>
   )
