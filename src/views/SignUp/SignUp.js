@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, StyleSheet, Platform, ScrollView, KeyboardAvoidingView } from 'react-native'
+import { View, Text, StyleSheet, Platform, ScrollView } from 'react-native'
 import { COLORS } from '../../general/styles/colors'
 import { Controller, useForm } from 'react-hook-form'
 

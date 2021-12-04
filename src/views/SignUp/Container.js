@@ -10,7 +10,6 @@ import { clearData, createUser } from './redux'
 const SignUpContainer = () => {
   const navigation = useNavigation()
   const dispatch = useDispatch()
-  const user = useSelector((state) => state.user)
   const message = useSelector((state) => state.message)
   const error = useSelector((state) => state.error)
   const loading = useSelector((state) => state.loading)
