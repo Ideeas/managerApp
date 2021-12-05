@@ -42,17 +42,17 @@ export default function Routers() {
 
   return (
     <NavigationContainer>
-      {user?.token === null ? (
+      {user?.token !== null ? (
+        <Private.Navigator screenOptions={screenOptions}>
+          <Private.Screen name="Home" component={Home} options={options} />
+          <Private.Screen name="Create" component={Create} options={options} />
+        </Private.Navigator>
+      ) : (
         <Public.Navigator>
           <Public.Screen name="Greetings" component={Greetings} options={options} />
           <Public.Screen name="Login" component={Login} options={options} />
           <Public.Screen name="SignUp" component={SignUp} options={options} />
         </Public.Navigator>
-      ) : (
-        <Private.Navigator screenOptions={screenOptions}>
-          <Private.Screen name="Home" component={Home} options={options} />
-          <Private.Screen name="Create" component={Create} options={options} />
-        </Private.Navigator>
       )}
     </NavigationContainer>
   )

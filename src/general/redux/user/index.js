@@ -12,9 +12,10 @@ const userReducer = (state, action) => {
   }
 }
 
-export const authUser = () => {
+export const authUser = (payload) => {
   return {
     type: AUTH_USER,
+    payload,
     meta: {
       reducer: userReducer,
     },

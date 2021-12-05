@@ -1,37 +1,13 @@
-import { takeLatest, put } from 'redux-saga/effects'
+import { takeLatest, call, put } from 'redux-saga/effects'
+import UserService from '../../../services/users'
 import { AUTH_USER, USER_AUTH_SUCCESS, USER_AUTH_FAIILED } from './'
 
 function* userSagas({ payload, meta }) {
   try {
     yield put({ type: 'START_LOADING' })
-    const userData = {
-      token: '123',
-      name: 'Vinicius',
-      projects: [
-        {
-          id: 1,
-          title: 'Projeto ex',
-          status: 'complete',
-          date: '16/08/2001',
-          owner: 'Junin',
-          image: '',
-          imageOwner: '',
-        },
-      ],
-
-      favoritesProjects: [
-        {
-          id: 1,
-          title: 'Projeto ex',
-          status: 'complete',
-          date: '16/08/2001',
-          owner: 'Junin',
-          image: '',
-          imageOwner: '',
-        },
-      ],
-    }
-    yield put({ type: USER_AUTH_SUCCESS, payload: userData, meta })
+    const user = { username: payload.username, password: payload.password }
+    const isUserExist = yield call(UserService.findOne, user)
+    yield put({ type: USER_AUTH_SUCCESS, payload: isUserExist, meta })
   } catch (error) {
     yield put({ type: USER_AUTH_FAIILED, payload: error, meta })
   } finally {
