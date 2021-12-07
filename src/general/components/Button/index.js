@@ -1,14 +1,12 @@
 import React from 'react'
 import { Text, TouchableOpacity, StyleSheet } from 'react-native'
-
 import { COLORS } from '../../styles/colors'
+import PropTypes from 'prop-types'
 
-const Button = ({ children, background = '', color = '', content, ...rest }) => {
-  const backgroundColor = background === '' ? COLORS.blue100 : background
-  const buttonColor = color === '' ? COLORS.blue500 : color
+const Button = ({ backgroundColor, color, content, ...rest }) => {
   return (
     <TouchableOpacity style={[styles.container, { backgroundColor }]} {...rest}>
-      <Text style={[styles.textButton, { color: buttonColor }]}>{content}</Text>
+      <Text style={[styles.textButton, { color }]}>{content}</Text>
     </TouchableOpacity>
   )
 }
@@ -26,5 +24,16 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
 })
+
+Button.PropTypes = {
+  backgroundColor: PropTypes.string,
+  color: PropTypes.string,
+  content: PropTypes.string.isRequired,
+}
+
+Button.defaultProps = {
+  backgroundColor: COLORS.white,
+  color: COLORS.blue700,
+}
 
 export default Button

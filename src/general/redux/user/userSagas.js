@@ -7,7 +7,12 @@ function* userSagas({ payload, meta }) {
     yield put({ type: 'START_LOADING' })
     const user = { username: payload.username, password: payload.password }
     const isUserExist = yield call(UserService.findOne, user)
-    yield put({ type: USER_AUTH_SUCCESS, payload: isUserExist, meta })
+
+    if (isUserExist.length <= 0) {
+      yield put({ type: USER_AUTH_FAIILED, payload: 'User dont exist', meta })
+    }
+
+    yield put({ type: USER_AUTH_SUCCESS, payload: isUserExist[0], meta })
   } catch (error) {
     yield put({ type: USER_AUTH_FAIILED, payload: error, meta })
   } finally {

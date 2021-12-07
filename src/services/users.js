@@ -31,11 +31,10 @@ export default class UserService {
       db.transaction(
         (tx) => {
           tx.executeSql(
-            `select * from ${table} where column username like '%${username}%' and column password like '%${password}%''`,
-            [],
-            (_, { user, rows }) => {
-              console.log(user)
-              resolve(user)
+            `select * from ${table} where username = ? and password = ?`,
+            [username, password],
+            (_, { insertId, rows }) => {
+              resolve(rows._array)
             }
           ),
             (error) => {
