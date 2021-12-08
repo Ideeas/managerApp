@@ -42,7 +42,7 @@ export default function Routers() {
 
   return (
     <NavigationContainer>
-      {user?.token !== null ? (
+      {user !== undefined && user?.id !== null ? (
         <Private.Navigator screenOptions={screenOptions}>
           <Private.Screen name="Home" component={Home} options={options} />
           <Private.Screen name="Create" component={Create} options={options} />
