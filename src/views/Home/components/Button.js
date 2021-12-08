@@ -1,15 +1,14 @@
 import React from 'react'
 import { Text, TouchableOpacity, StyleSheet } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
+import PropTypes from 'prop-types'
 import { COLORS } from '../../../general/styles/colors'
 
-const Button = ({ children, background = '', color = '', content, ...rest }) => {
-  const backgroundColor = background === '' ? COLORS.blue100 : background
-  const buttonColor = color === '' ? COLORS.blue500 : color
+const Button = ({ backgroundColor, color, content, ...rest }) => {
   return (
     <TouchableOpacity style={[styles.container, { backgroundColor }]} {...rest}>
-      <Text style={[styles.textButton, { color: buttonColor }]}>{content}</Text>
-      <MaterialCommunityIcons name="chevron-right" size={40} color={COLORS.blue500} />
+      <Text style={[styles.textButton, { color }]}>{content}</Text>
+      <MaterialCommunityIcons name="chevron-right" size={40} color={COLORS.blue700} />
     </TouchableOpacity>
   )
 }
@@ -30,5 +29,16 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 })
+
+Button.PropTypes = {
+  backgroundColor: PropTypes.string,
+  color: PropTypes.string,
+  content: PropTypes.string.isRequired,
+}
+
+Button.defaultProps = {
+  backgroundColor: COLORS.white,
+  color: COLORS.blue700,
+}
 
 export default Button

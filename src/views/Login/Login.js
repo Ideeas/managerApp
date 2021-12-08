@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { COLORS } from '../../general/styles/colors'
 import { useNavigation } from '@react-navigation/core'
@@ -12,6 +12,14 @@ import Button from '../../general/components/Button'
 
 const LoginView = ({ handleLogin }) => {
   const navigation = useNavigation()
+  const [loginData, setLoginData] = useState({
+    username: '',
+    password: '',
+  })
+
+  const handleChange = (key, value) => {
+    setLoginData({ ...loginData, [key]: value })
+  }
   return (
     <Container>
       <View style={styles.LogoContainer}>
@@ -20,15 +28,25 @@ const LoginView = ({ handleLogin }) => {
       </View>
 
       <View style={{ marginTop: 100 }}>
-        <Input placeholder="Username" />
+        <Input
+          placeholder="Username"
+          onChangeText={(text) => {
+            handleChange('username', text)
+          }}
+        />
         <View style={{ marginTop: 30 }}>
-          <Input placeholder="Password" />
+          <Input
+            placeholder="Password"
+            onChangeText={(text) => {
+              handleChange('password', text)
+            }}
+          />
         </View>
         <Text style={styles.forgotPassword}>Forgot password</Text>
       </View>
 
       <View style={styles.buttonContainer}>
-        <Button content="Sign in" onPress={handleLogin} />
+        <Button content="Sign in" onPress={() => handleLogin(loginData)} />
 
         <View style={styles.createAccountContainer}>
           <Text style={styles.createAccount}>Dont have account?</Text>

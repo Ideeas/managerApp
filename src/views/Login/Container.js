@@ -8,8 +8,8 @@ import { Alert } from 'react-native'
 const LoginContainer = () => {
   const dispatch = useDispatch()
   const error = useSelector((state) => state.error)
-  const handleLogin = () => {
-    dispatch(authUser())
+  const handleLogin = (payload) => {
+    dispatch(authUser(payload))
   }
 
   if (error) {

@@ -8,7 +8,7 @@ export const STOP_LOADING = 'STOP_LOADING'
 
 const initialState = {
   user: {
-    token: null,
+    id: null,
   },
 }
 
