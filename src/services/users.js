@@ -56,7 +56,6 @@ export default class UserService {
             `select * from ${table} where id = ?`,
             [userId],
             (_, { insertId, rows }) => {
-              console.log(rows)
               resolve(rows._array)
             }
           ),
