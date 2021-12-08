@@ -6,12 +6,11 @@ export const CLEAR_SIGNUP_DATA = 'CLEAR_SIGNUP_DATA'
 
 const reducer = (state, action) => {
   if (action.type === CLEAR_SIGNUP_DATA) {
-    return { ...state, user: { token: null }, message: '', error: '' }
+    return { ...state, user: { id: null }, message: '', error: '' }
   }
 
   if (action.type === USER_CREATED_SUCCESS) {
-    console.log(action.payload)
-    return { ...state, user: { ...action.payload, token: null }, message: 'SUCCESS' }
+    return { ...state, user: { ...action.payload, id: null }, message: 'SUCCESS' }
   }
 
   if (action.type === USER_CREATED_FAILED) {
