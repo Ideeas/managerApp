@@ -22,7 +22,7 @@ export default class DatabaseInit {
 
       `create table if not exists projects(
             id integer primary key autoincrement,
-            ownerID int,
+            ownerId int,
             name varchar(255),
             status bit not null,
             favorite bit default 0,
