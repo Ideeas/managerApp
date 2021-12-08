@@ -21,7 +21,7 @@ function HomeView({ user }) {
       <View style={styles.header}>
         <View>
           <Text style={styles.title}>Hello {user.name}</Text>
-          <Text style={styles.subTitle}>{user.favorites} projects in your favorites</Text>
+          <Text style={styles.subTitle}>{user.favorites.length} projects in your favorites</Text>
         </View>
         <UserImg />
       </View>

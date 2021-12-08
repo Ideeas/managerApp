@@ -1,15 +1,18 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { View, TouchableOpacity, StyleSheet } from 'react-native'
-import { COLORS } from '../../../general/styles/colors'
+import { COLORS } from '../../styles/colors'
+import PropTypes from 'prop-types'
 
 const ButtonStatus = ({ status, ...rest }) => {
-  const complete = status === 'complete' ? true : false
+  React.useEffect(() => {
+    console.log(status)
+  }, [])
   return (
     <TouchableOpacity style={styles.container} {...rest}>
       <View
         style={[
           styles.completeContainer,
-          complete ? { borderColor: COLORS.white } : { borderColor: 'rgba(0,0,0,0)' },
+          status ? { borderColor: COLORS.white } : { borderColor: 'rgba(0,0,0,0)' },
         ]}
       />
     </TouchableOpacity>
@@ -18,11 +21,16 @@ const ButtonStatus = ({ status, ...rest }) => {
 
 const styles = StyleSheet.create({
   container: {
+    width: 10,
+    height: 10,
+
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 5,
+
+    padding: 14,
     borderRadius: 50,
-    borderWidth: 2,
+    borderWidth: 3,
+
     borderColor: COLORS.white,
   },
 
@@ -32,5 +40,13 @@ const styles = StyleSheet.create({
     borderColor: COLORS.white,
   },
 })
+
+ButtonStatus.PropTypes = {
+  status: PropTypes.bool,
+}
+
+ButtonStatus.defaultProps = {
+  status: false,
+}
 
 export default ButtonStatus

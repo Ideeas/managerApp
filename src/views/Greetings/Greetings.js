@@ -41,7 +41,6 @@ const styles = StyleSheet.create({
 
   titleContainer: {
     marginVertical: Platform.OS === 'android' ? '10%' : '30%',
-    marginHorizontal: 20,
   },
 })
 

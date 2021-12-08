@@ -22,9 +22,10 @@ export default class DatabaseInit {
 
       `create table if not exists projects(
             id integer primary key autoincrement,
-            ownerID int,
+            ownerId int,
             name varchar(255),
             status bit not null,
+            favorite bit default 0,
             image varchar(255),
             owner_image varchar(255),
             foreign key (ownerID) references users(id));`,
