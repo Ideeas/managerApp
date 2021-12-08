@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/core'
 const CreateContainer = () => {
   const navigation = useNavigation()
 
-  return <CreateView />
+  return <CreateView status={false} />
 }
 
 export default CreateContainer
