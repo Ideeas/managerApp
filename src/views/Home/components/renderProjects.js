@@ -1,7 +1,7 @@
 import React from 'react'
 import { TouchableOpacity, View, Text, StyleSheet } from 'react-native'
 import { COLORS } from '../../../general/styles/colors'
-import ButtonStatus from './ButtonStatus'
+import ButtonStatus from '../../../general/components/ButtonStatus'
 
 const renderProjects = (props) => {
   const { cardData, isInteracting, handlePressIn, handlePressOut } = props
