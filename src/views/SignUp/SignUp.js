@@ -1,12 +1,12 @@
 import React from 'react'
 import { View, Text, StyleSheet, Platform, ScrollView } from 'react-native'
 import { COLORS } from '../../general/styles/colors'
-import { Controller, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 
-import Input from '../../general/components/Input'
 import Button from '../../general/components/Button'
 import Header from './components/Header'
 import Loading from '../../general/components/Loading'
+import RenderForm from '../../general/components/RenderFormsFIelds'
 
 const formFields = [
   {
@@ -59,39 +59,12 @@ const SignUpView = ({ submit, loading }) => {
     formState: { errors },
   } = useForm({ mode: 'onBlur' })
 
-  const renderFormsFields = () =>
-    formFields.map(({ type, rules, placeholder }, index) => (
-      <View key={index} style={{ marginVertical: 5 }}>
-        <Controller
-          control={control}
-          name={type}
-          rules={{
-            ...rules,
-            required: { value: true, message: `${placeholder} must not be empty` },
-          }}
-          render={({ field: { onChange, value, onBlur } }) => (
-            <Input
-              placeholder={placeholder}
-              value={value}
-              onBlur={onBlur}
-              onChangeText={onChange}
-            />
-          )}
-        />
-        {renderErrorMessage(type)}
-      </View>
-    ))
-
-  const renderErrorMessage = (type) => {
-    return <Text style={styles.error}>{errors[type]?.message}</Text>
-  }
-
   return (
     <View style={styles.container}>
       <Header title="Lets get started !" subtitle="Create new account" />
       <ScrollView showsVerticalScrollIndicator={false} style={{ marginTop: 30 }}>
         <Loading loading={loading} />
-        <View>{renderFormsFields()}</View>
+        <View>{RenderForm(formFields, control, errors)}</View>
 
         <View style={styles.buttonContainer}>
           <Button content="Sign Up" onPress={handleSubmit(submit)} />
