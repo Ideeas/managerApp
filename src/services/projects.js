@@ -33,13 +33,13 @@ export default class ProjectService {
     )
   }
 
-  static findFavorites() {
+  static findFavorites(id) {
     return new Promise((resolve, reject) =>
       db.transaction(
         (tx) => {
           tx.executeSql(
-            `select * from ${table} where favorite = ?`,
-            [true],
+            `select * from ${table} where ownerId = ? and favorite = ?`,
+            [id, 1],
             (_, { insertId, rows }) => {
               resolve(rows._array)
             }
@@ -55,12 +55,12 @@ export default class ProjectService {
     )
   }
 
-  static findAll() {
+  static findAll(id) {
     return new Promise((resolve, reject) =>
       db.transaction(
         (tx) => {
-          tx.executeSql(`select * from ${table}`, [], (_, { rows }) => {
-            resolve(rows)
+          tx.executeSql(`select * from ${table} where ownerId = ?`, [id], (_, { rows }) => {
+            resolve(rows._array)
           }),
             (error) => {
               console.log('SQL ERROR: ' + error)

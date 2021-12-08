@@ -1,6 +1,6 @@
 export class Project {
-  constructor(ownerID, name, status, favorite, image, owner_image) {
-    this.ownerID = ownerID
+  constructor(ownerId, name, status, favorite, image, owner_image) {
+    this.ownerId = ownerId
     this.favorite = favorite
     this.name = name
     this.status = status

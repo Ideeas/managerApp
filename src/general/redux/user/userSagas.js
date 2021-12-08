@@ -3,6 +3,7 @@ import * as Storage from '../../../services/storage'
 import * as ActionTypes from './'
 
 import UserService from '../../../services/users'
+import ProjectService from '../../../services/projects'
 
 function* authUserSagas({ payload, meta }) {
   try {
@@ -13,8 +14,16 @@ function* authUserSagas({ payload, meta }) {
     if (isUserExist.length <= 0) {
       throw new Error('user dont exist')
     }
+
+    const projects = yield call(ProjectService.findAll, isUserExist[0].id)
+    const favorites = yield call(ProjectService.findFavorites, isUserExist[0].id)
     yield call(Storage.setUserToken, String(isUserExist[0].id))
-    yield put({ type: ActionTypes.USER_AUTH_SUCCESS, payload: isUserExist[0], meta })
+
+    yield put({
+      type: ActionTypes.USER_AUTH_SUCCESS,
+      payload: { ...isUserExist[0], projects, favorites },
+      meta,
+    })
   } catch (error) {
     yield put({ type: ActionTypes.USER_AUTH_FAIILED, payload: error, meta })
   } finally {
@@ -26,10 +35,19 @@ function* hasUserAuthenticate({ meta }) {
   try {
     yield put({ type: 'START_LOADING' })
     const userId = yield call(Storage.getUserToken)
+
     if (userId == null) return
     const user = yield call(UserService.finById, userId)
+
     if (user.length <= 0) return
-    yield put({ type: ActionTypes.USER_AUTHENTICATED, payload: user[0], meta })
+
+    const projects = yield call(ProjectService.findAll, userId)
+    const favorites = yield call(ProjectService.findFavorites, userId)
+    yield put({
+      type: ActionTypes.USER_AUTHENTICATED,
+      payload: { ...user[0], projects, favorites },
+      meta,
+    })
   } catch (error) {
     throw new Error(error)
   } finally {
