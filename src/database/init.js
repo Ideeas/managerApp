@@ -25,6 +25,7 @@ export default class DatabaseInit {
             ownerID int,
             name varchar(255),
             status bit not null,
+            favorite bit default 0,
             image varchar(255),
             owner_image varchar(255),
             foreign key (ownerID) references users(id));`,
