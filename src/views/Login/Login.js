@@ -9,8 +9,9 @@ import Container from '../../general/components/container'
 import Title from './components/Title'
 import Input from '../../general/components/Input'
 import Button from '../../general/components/Button'
+import Loading from '../../general/components/Loading'
 
-const LoginView = ({ handleLogin }) => {
+const LoginView = ({ handleLogin, loading }) => {
   const navigation = useNavigation()
   const [loginData, setLoginData] = useState({
     username: '',
@@ -22,6 +23,7 @@ const LoginView = ({ handleLogin }) => {
   }
   return (
     <Container>
+      <Loading loading={loading} />
       <View style={styles.LogoContainer}>
         <Logo style={{ marginRight: 5 }} />
         <Title />

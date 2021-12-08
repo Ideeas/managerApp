@@ -6,7 +6,7 @@ import { Controller, useForm } from 'react-hook-form'
 import Input from '../../general/components/Input'
 import Button from '../../general/components/Button'
 import Header from './components/Header'
-import Spinner from 'react-native-loading-spinner-overlay'
+import Loading from '../../general/components/Loading'
 
 const formFields = [
   {
@@ -90,7 +90,7 @@ const SignUpView = ({ submit, loading }) => {
     <View style={styles.container}>
       <Header title="Lets get started !" subtitle="Create new account" />
       <ScrollView showsVerticalScrollIndicator={false} style={{ marginTop: 30 }}>
-        <Spinner visible={loading} color={COLORS.blue500} />
+        <Loading loading={loading} />
         <View>{renderFormsFields()}</View>
 
         <View style={styles.buttonContainer}>
