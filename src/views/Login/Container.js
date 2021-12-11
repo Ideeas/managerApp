@@ -14,7 +14,7 @@ const LoginContainer = () => {
   }
 
   if (error) {
-    Alert.alert('Login error, try again later' + error.message)
+    Alert.alert('Login error, try again later ' + error.message)
   }
   return <LoginView handleLogin={handleLogin} loading={loading} />
 }

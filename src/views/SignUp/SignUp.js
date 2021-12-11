@@ -62,7 +62,7 @@ const SignUpView = ({ submit, loading }) => {
   return (
     <View style={styles.container}>
       <Header title="Lets get started !" subtitle="Create new account" />
-      <ScrollView showsVerticalScrollIndicator={false} style={{ marginTop: 30 }}>
+      <ScrollView showsVerticalScrollIndicator={false} style={styles.formContainer}>
         <Loading loading={loading} />
         <View>{RenderForm(formFields, control, errors)}</View>
 
@@ -79,6 +79,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.blue500,
+  },
+
+  formContainer: {
+    marginTop: 30,
+    paddingHorizontal: 20,
   },
 
   buttonContainer: {
