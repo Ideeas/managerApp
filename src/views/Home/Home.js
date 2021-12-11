@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { View, Text, StyleSheet, FlatList } from 'react-native'
 import { getStatusBarHeight } from 'react-native-iphone-x-helper'
 import { COLORS } from '../../general/styles/colors'
@@ -10,18 +10,12 @@ import renderProjects from './components/renderProjects'
 import renderFavorites from './components/renderFavorites'
 
 function HomeView({ user }) {
-  const [isPressingButton, setIsPressingButton] = useState(false)
-
-  const handlePress = () => {
-    setIsPressingButton(!isPressingButton)
-  }
-
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <View>
           <Text style={styles.title}>Hello {user.name}</Text>
-          <Text style={styles.subTitle}>{user.favorites.length} projects in your favorites</Text>
+          <Text style={styles.subTitle}>{user.favorites?.length} projects in your favorites</Text>
         </View>
         <UserImg />
       </View>
@@ -34,9 +28,7 @@ function HomeView({ user }) {
             renderItem={({ item }) =>
               renderProjects({
                 cardData: item,
-                isInteracting: isPressingButton,
-                handlePressIn: handlePress,
-                handlePressOut: handlePress,
+                owner: user.name,
               })
             }
           />

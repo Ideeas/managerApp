@@ -4,20 +4,15 @@ import { COLORS } from '../../../general/styles/colors'
 import ButtonStatus from '../../../general/components/ButtonStatus'
 
 const renderProjects = (props) => {
-  const { cardData, isInteracting, handlePressIn, handlePressOut } = props
-  const { status, title, owner, date } = cardData
+  const { cardData } = props
+  const { status, name, date } = cardData
 
   return (
-    <TouchableOpacity
-      style={[styles.container, isInteracting && styles.onInteracting]}
-      activeOpacity={0.5}
-      onPressIn={handlePressIn}
-      onPressOut={handlePressOut}
-    >
+    <TouchableOpacity style={styles.container} activeOpacity={0.5}>
       <ButtonStatus status={status} />
       <View>
-        <Text style={styles.title}>{title}</Text>
-        <Text style={styles.subTitle}>{owner}</Text>
+        <Text style={styles.title}>{name}</Text>
+        <Text style={styles.subTitle}>{props.owner}</Text>
       </View>
       <Text style={{ color: COLORS.white }}>{date}</Text>
     </TouchableOpacity>

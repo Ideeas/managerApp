@@ -7,11 +7,11 @@ import CompleteImg from '../../../../general/assets/complete_img.svg'
 import InProgrees from '../../../../general/assets/inProgress_img.svg'
 import ButtonStatus from '../../../../general/components/ButtonStatus'
 
-const Status = ({ complete }) => {
+const Status = ({ complete, handleChangeStatus }) => {
   const buttonStatus = (text, complete) => {
     return (
       <View style={styles.statusContainer}>
-        <ButtonStatus status={complete} />
+        <ButtonStatus status={complete} onPress={handleChangeStatus} />
         <Text style={styles.status}>{text}</Text>
       </View>
     )
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
   },
 })
 
-Status.PropTypes = {
+Status.propsTypes = {
   complete: PropTypes.bool,
 }
 
