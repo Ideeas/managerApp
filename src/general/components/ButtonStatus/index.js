@@ -4,9 +4,6 @@ import { COLORS } from '../../styles/colors'
 import PropTypes from 'prop-types'
 
 const ButtonStatus = ({ status, ...rest }) => {
-  React.useEffect(() => {
-    console.log(status)
-  }, [])
   return (
     <TouchableOpacity style={styles.container} {...rest}>
       <View
@@ -41,7 +38,7 @@ const styles = StyleSheet.create({
   },
 })
 
-ButtonStatus.PropTypes = {
+ButtonStatus.propsTypes = {
   status: PropTypes.bool,
 }
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, TextInput, StyleSheet } from 'react-native'
+import { TextInput, StyleSheet } from 'react-native'
 import { COLORS } from '../../styles/colors'
 
 const Title = ({ ...rest }) => {
