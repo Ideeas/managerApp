@@ -6,10 +6,12 @@ import SvgGreetings from '../../general/assets/SvgGreetings.svg'
 
 import Container from '../../general/components/container'
 import Button from '../../general/components/Button'
+import Spinner from 'react-native-loading-spinner-overlay'
 
-const GreetingsView = ({ navigate }) => {
+const GreetingsView = ({ navigate, loading }) => {
   return (
     <Container>
+      {loading && <Spinner loading={loading} color={COLORS.blue500} />}
       <View style={styles.contentContainer}>
         <StatusBar backgroundColor={COLORS.blue500} />
         <SvgGreetings width={300} height={300} />
