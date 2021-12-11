@@ -9,9 +9,9 @@ export default class ProjectService {
       db.transaction(
         (tx) => {
           tx.executeSql(
-            `insert into ${table} (ownerID, name, status, favorite, image, owner_image) values (?, ?, ?, ?)`,
+            `insert into ${table} (ownerId, name, status, favorite, image, owner_image) values (?, ?, ?, ?, ?, ?)`,
             [
-              project.ownerID,
+              project.ownerId,
               project.name,
               project.status,
               project.favorite,
