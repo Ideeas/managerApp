@@ -1,15 +1,15 @@
 import React from 'react'
-import { View, Text, StyleSheet, TouchableWithoutFeedback } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import PropTypes from 'prop-types'
 import { COLORS } from '../../../../general/styles/colors'
 
-const Header = (handlePress) => {
+const Header = ({ handlePress }) => {
   return (
     <View style={styles.container}>
       <Text style={[styles.title, { color: COLORS.white }]}>New Project</Text>
-      <TouchableWithoutFeedback onPress={handlePress}>
+      <TouchableOpacity onPress={handlePress} activeOpacity={0.2}>
         <Text style={[styles.title, { color: COLORS.blue300 }]}>Done</Text>
-      </TouchableWithoutFeedback>
+      </TouchableOpacity>
     </View>
   )
 }
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   },
 })
 
-Header.PropTypes = {
+Header.propsTypes = {
   backgroundColor: PropTypes.func.isRequired,
 }
 

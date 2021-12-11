@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   },
 })
 
-Button.PropTypes = {
+Button.propsTypes = {
   backgroundColor: PropTypes.string,
   color: PropTypes.string,
   content: PropTypes.string.isRequired,

@@ -1,31 +1,21 @@
-import React, { useEffect, useRef } from 'react'
-import { StyleSheet, Animated } from 'react-native'
+import React from 'react'
+import { View, StyleSheet } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { COLORS } from '../../../general/styles/colors'
 
 function Icons({ name, isSelect }) {
-  const animatedContainer = useRef(new Animated.ValueXY()).current
-
   const shadowConfig = {
     shadowColor: 'rgba(0,0,0,0.3)',
     shadowOpacity: 2,
-    shadowOffset: {
-      width: animatedContainer.x,
-      height: animatedContainer.y,
-    },
+    // shadowOffset: {
+    //   width: animatedContainer.x,
+    //   height: animatedContainer.y,
+    // },
   }
 
-  useEffect(() => {
-    Animated.spring(animatedContainer, {
-      toValue: { x: 2, y: 10 },
-      useNativeDriver: false,
-    }).start()
-  }, [isSelect])
-
   return (
-    <Animated.View
-      style={[
-        animatedContainer.getLayout(),
+    <View
+      style={
         isSelect && [
           styles.container,
           {
@@ -33,11 +23,11 @@ function Icons({ name, isSelect }) {
             shadowOffset: shadowConfig.shadowOffset,
             shadowOpacity: shadowConfig.shadowOpacity,
           },
-        ],
-      ]}
+        ]
+      }
     >
       <MaterialCommunityIcons name={name} size={30} color={COLORS.white} />
-    </Animated.View>
+    </View>
   )
 }
 

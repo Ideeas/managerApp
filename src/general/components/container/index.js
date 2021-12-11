@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
   },
 })
 
-Container.PropTypes = {
+Container.propsTypes = {
   backgroundColor: PropTypes.string,
   children: PropTypes.node,
 }

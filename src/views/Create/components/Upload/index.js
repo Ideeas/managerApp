@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native'
 import { COLORS } from '../../../../general/styles/colors'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
@@ -12,7 +12,7 @@ const Upload = ({ img, title, handlePress }) => {
         <Text style={styles.upload}>Upload</Text>
       </>
     ) : (
-      <Image source={{ uri: img }} style={styles.image} />
+      <Image source={{ uri: img }} style={[styles.image, { width: '100%', height: '100%' }]} />
     )
   }
   return (
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
   },
 })
 
-Upload.PropTypes = {
+Upload.propsTypes = {
   title: PropTypes.string.isRequired,
   handlePress: PropTypes.func.isRequired,
 }

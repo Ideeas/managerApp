@@ -1,17 +1,18 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { COLORS } from '../general/styles/colors'
 
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { hasUserAuth } from '../general/redux/user'
+import { getUserToken } from '../services/storage'
 
 import Greetings from '../views/Greetings/Container'
 import Login from '../views/Login/Container'
 import SignUp from '../views/SignUp/Container'
 import Home from '../views/Home/container'
 import Create from '../views/Create/Container'
-
 import Icons from './components/Icons'
 
 const Public = createNativeStackNavigator()
@@ -19,6 +20,8 @@ const Private = createBottomTabNavigator()
 
 export default function Routers() {
   const user = useSelector((state) => state.user)
+  const dispatch = useDispatch()
+  const [token, setToken] = useState(null)
 
   const options = {
     headerShown: false,
@@ -40,9 +43,14 @@ export default function Routers() {
     tabBarShowLabel: false,
   })
 
+  useEffect(() => {
+    dispatch(hasUserAuth())
+    getUserToken().then(setToken)
+  }, [user.id])
+
   return (
     <NavigationContainer>
-      {user !== undefined && user?.id !== null ? (
+      {user !== undefined && token !== null ? (
         <Private.Navigator screenOptions={screenOptions}>
           <Private.Screen name="Home" component={Home} options={options} />
           <Private.Screen name="Create" component={Create} options={options} />

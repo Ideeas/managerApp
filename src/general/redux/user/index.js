@@ -3,18 +3,30 @@ export const USER_AUTHENTICATED = 'USER_AUTHENTICATED'
 export const USER_AUTH_SUCCESS = 'USER_AUTH_SUCCESS'
 export const USER_AUTH_FAIILED = 'USER_AUTH_FAIILED'
 export const AUTH_USER = 'AUTH_USER'
+export const UPDATE_USER_DATA = 'UPDATE_USER_DATA'
+export const UPDATE_USER_DATA_SUCCESS = 'UPDATE_USER_DATA_SUCCESS'
 
 const userReducer = (state, action) => {
-  if (action.type === USER_AUTHENTICATED) {
-    return { ...state, user: action.payload }
-  }
+  switch (action.type) {
+    case USER_AUTHENTICATED: {
+      return { ...state, user: action.payload }
+    }
 
-  if (action.type === USER_AUTH_SUCCESS) {
-    return { ...state, user: action.payload }
-  }
+    case USER_AUTH_SUCCESS: {
+      return { ...state, user: action.payload }
+    }
 
-  if (action.type === USER_AUTH_FAIILED) {
-    return { ...state, error: action.payload }
+    case USER_AUTH_FAIILED: {
+      return { ...state, error: action.payload }
+    }
+
+    case UPDATE_USER_DATA_SUCCESS: {
+      return { ...state, user: action.payload }
+    }
+
+    default: {
+      return state
+    }
   }
 }
 
@@ -36,3 +48,11 @@ export const authUser = (payload) => {
     },
   }
 }
+
+export const updateUserData = (payload) => ({
+  type: UPDATE_USER_DATA,
+  payload,
+  meta: {
+    reducer: userReducer,
+  },
+})
