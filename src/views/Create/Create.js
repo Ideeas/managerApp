@@ -1,47 +1,52 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
-import { useForm } from 'react-hook-form'
+import { View, StyleSheet } from 'react-native'
 import { getStatusBarHeight } from 'react-native-iphone-x-helper'
+
 import Container from '../../general/components/container'
-import RenderForm from '../../general/components/RenderFormsFIelds'
+import Input from '../../general/components/Input'
 import Header from './components/Header'
 import Status from './components/Status'
 import Upload from './components/Upload'
+import Loading from '../../general/components/Loading'
 
-const formFields = [
-  {
-    type: 'owner',
-    placeholder: 'Owner',
-    value: '',
-  },
-
-  {
-    type: 'name',
-    placeholder: 'Name',
-    value: '',
-  },
-]
-
-const CreateView = ({ status }) => {
-  const {
-    handleSubmit,
-    formState: { errors },
-    control,
-  } = useForm({ mode: 'onChange' })
-
+const CreateView = ({
+  formFields,
+  loading,
+  handleChangeStatus,
+  handleChangeName,
+  handleUploadImg,
+  handleSubmit,
+}) => {
   return (
     <Container justifyContent={'flex-start'}>
+      {loading && <Loading />}
       <View style={styles.header}>
-        <Header handlePress={() => {}} />
+        <Header
+          handlePress={() => {
+            handleSubmit(formFields)
+          }}
+        />
       </View>
-      {RenderForm(formFields, control, errors)}
+      <View style={{ marginBottom: '20%' }}>
+        <Input
+          placeholder="Name"
+          value={formFields.name}
+          onChangeText={(event) => handleChangeName(event)}
+        />
+      </View>
       <View>
-        <Status complete={status} />
+        <Status complete={formFields.status} handleChangeStatus={handleChangeStatus} />
       </View>
 
       <View style={styles.uploadImageContainer}>
-        <Upload title="Project" handlePress={() => {}} />
-        <Upload title="Owner" handlePress={() => {}} />
+        <Upload title="Project" img={formFields.image} handlePress={handleUploadImg} />
+        <Upload
+          title="Owner"
+          img={formFields.owner_image}
+          handlePress={async () => {
+            await handleUploadImg('owner')
+          }}
+        />
       </View>
     </Container>
   )
@@ -56,6 +61,7 @@ const styles = StyleSheet.create({
     width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-around',
+    marginTop: 10,
   },
 })
 
