@@ -55,9 +55,28 @@ function* hasUserAuthenticate({ meta }) {
   }
 }
 
+function* updateUser({ payload, meta }) {
+  try {
+    yield put({ type: 'START_LOADING' })
+    const userId = payload.project.ownerId
+    const projects = yield call(ProjectService.findAll, userId)
+    const favorites = yield call(ProjectService.findFavorites, userId)
+    yield put({
+      type: ActionTypes.UPDATE_USER_DATA_SUCCESS,
+      payload: { ...payload.user, projects, favorites },
+      meta,
+    })
+  } catch (error) {
+    throw new Error(error)
+  } finally {
+    yield put({ type: 'STOP_LOADING' })
+  }
+}
+
 const userCombineSagas = [
   takeLatest(ActionTypes.AUTH_USER, authUserSagas),
   takeLatest(ActionTypes.HAS_USER_AUTH, hasUserAuthenticate),
+  takeLatest(ActionTypes.UPDATE_USER_DATA, updateUser),
 ]
 
 export default userCombineSagas
